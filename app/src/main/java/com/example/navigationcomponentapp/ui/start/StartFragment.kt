@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 
 import com.example.navigationcomponentapp.R
+import com.example.navigationcomponentapp.extensions.navigateWithAnimations
 import kotlinx.android.synthetic.main.fragment_start.*
 
 class StartFragment : Fragment() {
@@ -30,8 +31,9 @@ class StartFragment : Fragment() {
         buttonNext.setOnClickListener {
 //           listner.buttonClicked() // método da main activity que troca o fragment
          //Tenho que recuperar o NavController
-            findNavController().navigate(R.id.action_startFragment_to_profileFragment)// recomendado utilizar o id da ação, só usar
+//            findNavController().navigate(R.id.action_startFragment_to_profileFragment)// recomendado utilizar o id da ação, só usar
             //o id da tela qd for pra outra tela que tá fora desse grafo
+            findNavController().navigateWithAnimations(R.id.action_startFragment_to_loginFragment)
         }
     }
 

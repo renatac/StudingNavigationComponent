@@ -17,7 +17,11 @@ class LoginViewModel : ViewModel() {
         //fazer isso de forma manual, tendo que ter um liveData pra cada um dos componentes do
         //layout que eu quisesse mostrar o erro. Do jeito que tá faço uma validação só
         //pra todos os componentes
-        class invalidAuthentication(val fields: List<Pair<String, Int>>)
+        class InvalidAuthentication(val fields: List<Pair<String, Int>>)
+            : AuthenticationState() //herança
+        object Authenticated //é object pq não recebo parâmetro na construção do objeto
+            : AuthenticationState() //herança
+        object Unauthenticated //é object pq não recebo parâmetro na construção do objeto
             : AuthenticationState() //herança
     }
 
@@ -25,9 +29,15 @@ class LoginViewModel : ViewModel() {
     //várias propriedades, então eu teria que ter vários observers no LoginFragment
     val authenticationStateEvent = MutableLiveData<AuthenticationState>()
 
+    //Assim que ele criar meu Fragment
+    init {
+        authenticationStateEvent.value = AuthenticationState.Unauthenticated
+    }
+
     fun authentication(username: String, password: String){
         if(isValidForm(username, password)){
             //Usuário está authenticado
+            authenticationStateEvent.value = AuthenticationState.Authenticated
         }
     }
 
@@ -41,7 +51,7 @@ class LoginViewModel : ViewModel() {
             invalidFields.add(INPUT_PASSWORD)
         }
         if(invalidFields.isNotEmpty()){
-            authenticationStateEvent.value = AuthenticationState.invalidAuthentication(invalidFields)
+            authenticationStateEvent.value = AuthenticationState.InvalidAuthentication(invalidFields)
             return false
         }
         return true

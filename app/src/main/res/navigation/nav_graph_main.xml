@@ -13,9 +13,9 @@
         <action
             android:id="@+id/action_startFragment_to_profileFragment"
             app:destination="@id/profileFragment"/>
-        <action
-            android:id="@+id/action_startFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+<!--        <action--> 
+<!--            android:id="@+id/action_startFragment_to_loginFragment"-->
+<!--            app:destination="@id/loginFragment" />-->
         <!--            app:enterAnim="@anim/slide_in_right"-->
 <!--            app:exitAnim="@anim/slide_out_left"-->
 <!--            app:popEnterAnim="@anim/slide_in_left"-->

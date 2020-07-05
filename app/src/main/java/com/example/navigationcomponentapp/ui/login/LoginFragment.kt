@@ -1,13 +1,12 @@
 package com.example.navigationcomponentapp.ui.login
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-
 import com.example.navigationcomponentapp.R
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.login_fragment.*
@@ -20,7 +19,12 @@ class LoginFragment : Fragment() {
 //        fun newInstance() = LoginFragment()
 //    }
 
-    private lateinit var viewModel: LoginViewModel
+    //Era assim quando só usava o viewModel aqui dentro, mas dps quis usar tb
+    // no Fragment Profile.
+   // private lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by activityViewModels()
+    //com o activityViewModels(), o Framework do android, o livecycle faz a
+    //criação do viewModel. E o escopo dele é o minha activity.
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,12 +37,15 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+        //Não preciso mais disso, pois a linha 27 já faz isso pra mim
+        //o ViewModelProviders é um factory
+        //viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
         //(Livecycler onwer e um Observer)
        viewModel.authenticationStateEvent.observe(viewLifecycleOwner, Observer { authenticationState->
             when(authenticationState){
-                is LoginViewModel.AuthenticationState.invalidAuthentication -> {
+                //verifico se a autenticação é inválida
+                is LoginViewModel.AuthenticationState.InvalidAuthentication -> {
                     //Poderia tb usar o AppCompatEditText
                     val validationFields: Map<String, TextInputLayout> = initValidationFields()
                     //como invalidAuthentication retorna os campos que estão inválidos:

@@ -33,7 +33,7 @@ class StartFragment : Fragment() {
          //Tenho que recuperar o NavController
 //            findNavController().navigate(R.id.action_startFragment_to_profileFragment)// recomendado utilizar o id da ação, só usar
             //o id da tela qd for pra outra tela que tá fora desse grafo
-            findNavController().navigateWithAnimations(R.id.action_startFragment_to_loginFragment)
+            findNavController().navigateWithAnimations(R.id.action_startFragment_to_profileFragment)
         }
     }
 

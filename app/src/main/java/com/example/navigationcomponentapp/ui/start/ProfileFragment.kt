@@ -5,10 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 
 import com.example.navigationcomponentapp.R
+import com.example.navigationcomponentapp.ui.login.LoginViewModel
 
 class ProfileFragment : Fragment() {
+
+    //Se o ProfileFragment chamar o by activityViewModels do LoginViewModel
+    //e esse LoginViewModel já tiver sido criado, eu recebo a mesma instância,
+    //se não o crio e o coloco para o escopo da activity
+    private val loginViewModel: LoginViewModel by activityViewModels()
+    //com o activityViewModels(), o Framework do android, o livecycle faz a
+    //criação do viewModel. E o escopo dele é o minha activity.
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -17,10 +28,29 @@ class ProfileFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
-    //para ter a função de forma estática
-    companion object {
-        fun returnInstance(): ProfileFragment {
-            return ProfileFragment()
-        }
+    //Quando toda a minha hierarquia de view do meu layout estiver criada:
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loginViewModel.authenticationStateEvent.observe(viewLifecycleOwner, Observer {
+            authenticationState->
+            when(authenticationState){
+                //Verifico se o usuário está logado
+                is LoginViewModel.AuthenticationState.Authenticated -> {
+
+                }
+                is LoginViewModel.AuthenticationState.Unauthenticated->{
+                    //vá pra login
+                    findNavController().navigate(R.id.loginFragment)
+                }
+            }
+
+        })
     }
+
+//    //para ter a função de forma estática
+//    companion object {
+//        fun returnInstance(): ProfileFragment {
+//            return ProfileFragment()
+//        }
+//    }
 }

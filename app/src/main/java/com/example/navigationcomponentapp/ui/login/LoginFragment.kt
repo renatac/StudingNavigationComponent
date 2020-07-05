@@ -6,11 +6,13 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.navigationcomponentapp.R
+import com.example.navigationcomponentapp.extensions.dismissError
 import com.example.navigationcomponentapp.ui.start.StartFragment
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.login_fragment.*
@@ -74,6 +76,20 @@ class LoginFragment : Fragment() {
             val username = inputLoginUsername.text.toString()
             val password = inputLoginPassword.text.toString()
             viewModel.authentication(username, password)
+        }
+
+        inputLoginUsername.addTextChangedListener {
+//            inputLayoutLoginUsername.error = null
+//            inputLayoutLoginUsername.isErrorEnabled = false
+        //No lugar do código acima chamo a extensão que eu criei
+            inputLayoutLoginUsername.dismissError()
+        }
+
+        inputLoginPassword.addTextChangedListener {
+//            inputLayoutLoginPassword.error = null
+//            inputLayoutLoginPassword.isErrorEnabled = false
+            //No lugar do código acima chamo a extensão que eu criei
+            inputLayoutLoginPassword.dismissError()
         }
 
 

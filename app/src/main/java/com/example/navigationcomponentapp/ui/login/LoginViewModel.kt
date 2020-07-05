@@ -25,20 +25,27 @@ class LoginViewModel : ViewModel() {
             : AuthenticationState() //herança
     }
 
+    //Propriedades do ViewModel
     //Obs que o MutableLiveData ser do tipo AuthenticationState ajuda, pois se eu tivesse
     //várias propriedades, então eu teria que ter vários observers no LoginFragment
     val authenticationStateEvent = MutableLiveData<AuthenticationState>()
+    var username : String = ""
 
     //Assim que ele criar meu Fragment
     init {
-        authenticationStateEvent.value = AuthenticationState.Unauthenticated
+        refuseAuthentication()
     }
 
     fun authentication(username: String, password: String){
         if(isValidForm(username, password)){
             //Usuário está authenticado
+            this.username = username
             authenticationStateEvent.value = AuthenticationState.Authenticated
         }
+    }
+
+    public fun refuseAuthentication(){
+        authenticationStateEvent.value = AuthenticationState.Unauthenticated
     }
 
     //validação e gerenciamento de estado no viewModel

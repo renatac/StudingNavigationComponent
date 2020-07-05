@@ -6,9 +6,10 @@
     tools:context=".ui.start.ProfileFragment">
 
     <TextView
+        android:id="@+id/textProfileUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile Fragment"
+        tools:text="Welcome. Douglas"
         android:layout_gravity="center"/>
 
 </FrameLayout>

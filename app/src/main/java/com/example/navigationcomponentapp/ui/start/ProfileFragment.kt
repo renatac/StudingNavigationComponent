@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 
 import com.example.navigationcomponentapp.R
 import com.example.navigationcomponentapp.ui.login.LoginViewModel
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
 
@@ -44,7 +45,8 @@ class ProfileFragment : Fragment() {
             when(authenticationState){
                 //Verifico se o usuário está logado
                 is LoginViewModel.AuthenticationState.Authenticated -> {
-
+                    textProfileUsername.text =
+                            getString(R.string.profile_text_username, loginViewModel.username)
                 }
                 is LoginViewModel.AuthenticationState.Unauthenticated->{
                     //vá pra login

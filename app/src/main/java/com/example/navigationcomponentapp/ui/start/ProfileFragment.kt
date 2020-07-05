@@ -14,6 +14,14 @@ import com.example.navigationcomponentapp.ui.login.LoginViewModel
 
 class ProfileFragment : Fragment() {
 
+//    No Android Architecture Components do Livecycle, compartilhar dados entre as activities utilizando um ViewModel,
+//    usando a vinculação de um ViewModel a uma activity, ou seja, a um escopo , que é a activity e com isso
+//    conseguimos ter acesso a esse mesmo ViewModel entre os fragmentos do App.
+//    LoginFragment e ProfileFragment e irei compartilhar os dados de um ViewModel com esses dois Fragmentos,
+//    usando o conceito de ViewModel compartilhado com ViewModel StoreOwner, que a activity que implementará
+//    esse cara e ela consegue guardar no escopo dela a referência do ViewModel para no caso quando eu precisar
+//    do ViewModel nos Fragmentos podemos chamar de forma prática para poder utilizar o ViewModel.
+
     //Se o ProfileFragment chamar o by activityViewModels do LoginViewModel
     //e esse LoginViewModel já tiver sido criado, eu recebo a mesma instância,
     //se não o crio e o coloco para o escopo da activity

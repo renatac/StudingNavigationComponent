@@ -57,6 +57,8 @@ class LoginFragment : Fragment() {
                     findNavController().popBackStack() //sem parâmetro, então volta
                     //para o ProfileFragment
                 }
+                is LoginViewModel.AuthenticationState.Unauthenticated->{
+                }
 
                 //verifico se a autenticação é inválida
                 is LoginViewModel.AuthenticationState.InvalidAuthentication -> {
@@ -78,6 +80,10 @@ class LoginFragment : Fragment() {
             viewModel.authentication(username, password)
         }
 
+        buttonLoginSignUp.setOnClickListener {
+            findNavController().popBackStack(R.id.startFragment, false)
+        }
+
         inputLoginUsername.addTextChangedListener {
 //            inputLayoutLoginUsername.error = null
 //            inputLayoutLoginUsername.isErrorEnabled = false
@@ -91,7 +97,6 @@ class LoginFragment : Fragment() {
             //No lugar do código acima chamo a extensão que eu criei
             inputLayoutLoginPassword.dismissError()
         }
-
 
         //capturar o toque no botão físico do dispositivo do usuário que é o back
         //button

@@ -44,6 +44,10 @@ class LoginViewModel : ViewModel() {
         }
     }
 
+    fun unauthentication(){
+            authenticationStateEvent.value = AuthenticationState.Unauthenticated
+    }
+
     public fun refuseAuthentication(){
         authenticationStateEvent.value = AuthenticationState.Unauthenticated
     }

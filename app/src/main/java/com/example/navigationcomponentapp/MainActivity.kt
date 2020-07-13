@@ -7,8 +7,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.navigationcomponentapp.ui.start.ProfileFragment
-import com.example.navigationcomponentapp.ui.start.StartFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 //StartFragment.onButtonClicked é a interface que está dentro do StartFragment

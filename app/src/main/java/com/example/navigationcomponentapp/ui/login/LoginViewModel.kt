@@ -1,5 +1,6 @@
 package com.example.navigationcomponentapp.ui.login
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.navigationcomponentapp.R
@@ -11,7 +12,7 @@ class LoginViewModel : ViewModel() {
 
     //Para representar o estado do meu usuário, se é logado ou não
     //Coloco aqui dentro todos os estados que o usuário pode ter caso o login estiver errado, estiver certo
-    sealed class AuthenticationState(){                //<username,password>
+    sealed class AuthenticationState{                //<username,password>
         //Estrutura de List para retornar os erros para poder ter facilidade no fragment para
         //pode mapear os erros, fazendo um forEach e mapear e setar no campo correto, em vez de
         //fazer isso de forma manual, tendo que ter um liveData pra cada um dos componentes do
@@ -26,33 +27,38 @@ class LoginViewModel : ViewModel() {
     }
 
     //Propriedades do ViewModel
+    var token: String = ""
+    var username : String = ""
     //Obs que o MutableLiveData ser do tipo AuthenticationState ajuda, pois se eu tivesse
     //várias propriedades, então eu teria que ter vários observers no LoginFragment
-    val authenticationStateEvent = MutableLiveData<AuthenticationState>()
-    var username : String = ""
+    private val _authenticationStateEvent = MutableLiveData<AuthenticationState>()
+    val authenticationStateEvent: LiveData<AuthenticationState>
+        get() = _authenticationStateEvent
 
     //Assim que ele criar meu Fragment
     init {
         refuseAuthentication()
     }
 
+    public fun refuseAuthentication(){
+        _authenticationStateEvent.value = AuthenticationState.Unauthenticated
+    }
+
+    fun authenticationToken(token: String, username: String) {
+        this.token = token
+        this.username = username
+        _authenticationStateEvent.value = AuthenticationState.Authenticated
+    }
+
     fun authentication(username: String, password: String){
         if(isValidForm(username, password)){
             //Usuário está authenticado
             this.username = username
-            authenticationStateEvent.value = AuthenticationState.Authenticated
+            _authenticationStateEvent.value = AuthenticationState.Authenticated
         }
     }
 
-    fun unauthentication(){
-            authenticationStateEvent.value = AuthenticationState.Unauthenticated
-    }
-
-    public fun refuseAuthentication(){
-        authenticationStateEvent.value = AuthenticationState.Unauthenticated
-    }
-
-    //validação e gerenciamento de estado no viewModel
+     //validação e gerenciamento de estado no viewModel
     private fun isValidForm(username: String, password: String): Boolean{
         val invalidFields = arrayListOf<Pair<String, Int>>()
         if(username.isEmpty()){
@@ -62,7 +68,7 @@ class LoginViewModel : ViewModel() {
             invalidFields.add(INPUT_PASSWORD)
         }
         if(invalidFields.isNotEmpty()){
-            authenticationStateEvent.value = AuthenticationState.InvalidAuthentication(invalidFields)
+            _authenticationStateEvent.value = AuthenticationState.InvalidAuthentication(invalidFields)
             return false
         }
         return true
@@ -73,6 +79,4 @@ class LoginViewModel : ViewModel() {
         val INPUT_USERNAME = "INPUT_USERNAME" to R.string.login_input_layout_error_invalid_username
         val INPUT_PASSWORD = "INPUT_PASSWORD" to R.string.login_input_layout_error_invalid_password
     }
-
-
 }

@@ -57,8 +57,6 @@ class LoginFragment : Fragment() {
                     findNavController().popBackStack() //sem parâmetro, então volta
                     //para o ProfileFragment
                 }
-                is LoginViewModel.AuthenticationState.Unauthenticated->{
-                }
 
                 //verifico se a autenticação é inválida
                 is LoginViewModel.AuthenticationState.InvalidAuthentication -> {
@@ -80,9 +78,9 @@ class LoginFragment : Fragment() {
             viewModel.authentication(username, password)
         }
 
-        buttonLoginSignUp.setOnClickListener {
-            findNavController().popBackStack(R.id.startFragment, false)
-        }
+//        buttonLoginSignUp.setOnClickListener {
+//            findNavController().popBackStack(R.id.profileFragment, false)
+//        }
 
         inputLoginUsername.addTextChangedListener {
 //            inputLayoutLoginUsername.error = null

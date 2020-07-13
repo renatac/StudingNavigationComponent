@@ -14,9 +14,31 @@
     <string name="login_input_layout_hint_username">Username</string>
     <string name="login_input_layout_hint_password">Password</string>
     <string name="login_button_text_sign_in">Sign in</string>
-    <string name="login_button_text_sign_up">Sign out</string>
+    <string name="login_button_text_sign_up">Sign up</string>
     <string name="login_input_layout_error_invalid_username">Invalid username</string>
     <string name="login_input_layout_error_invalid_password">Invalid password</string>
+
+    <!--Commons-->
+    <string name="common_next">NEXT</string>
+    <string name="common_finish">FINISH</string>
+
+    <!--Profile Data-->
+    <string name="profile_data_action_bar_title">Profile Data</string>
+    <string name="profile_data_action_bar_title_ok">ProfileDataFragment</string>
+    <string name="profile_data_input_layout_hint_name">Name</string>
+    <string name="profile_data_input_layout_hint_bio">Bio</string>
+    <string name="profile_data_input_layout_error_invalid_name">Invalid Name</string>
+    <string name="profile_data_input_layout_error_invalid_bio">Invalid Bio</string>
+
+    <!--Choose Credentials-->
+    <string name="choose_credentials_action_bar_title">Choose Credentials</string>
+    <string name="choose_credentials_input_layout_hint_username">usename</string>
+    <string name="choose_credentials_input_layout_hint_password">password</string>
+    <string name="choose_credentials_input_layout_error_invalid_usename">Invalid username</string>
+    <string name="choose_credentials_input_layout_error_invalid_password">Invalid password</string>
+    <string name="choose_credentials_text_name">%1$s, choose your credentials</string>
+    <string name="fragment_choose_credentials">Choose User + Password</string>
+
 
 
 </resources>

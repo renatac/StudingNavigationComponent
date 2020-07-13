@@ -1,4 +1,4 @@
-package com.example.navigationcomponentapp.ui.start
+package com.example.navigationcomponentapp.ui.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
